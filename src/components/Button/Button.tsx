@@ -185,7 +185,11 @@ export function Button({
     ) : (
       icon
     );
-    iconMarkup = <span className={styles.Icon}>{iconInner}</span>;
+    iconMarkup = (
+      <span className={classNames(styles.Icon, loading && styles.Hidden)}>
+        {iconInner}
+      </span>
+    );
   }
 
   const childMarkup = children ? (
@@ -194,8 +198,13 @@ export function Button({
 
   const spinnerColor = primary || destructive ? 'white' : 'inkLightest';
 
-  const spinnerSVGMarkup = loading ? (
-    <span className={styles.Spinner}>
+  const spinnerVisibility = classNames(
+    styles.Spinner,
+    !loading && styles.Hidden,
+  );
+
+  const spinnerSVGMarkup = (
+    <span className={spinnerVisibility}>
       <Spinner
         size="small"
         color={spinnerColor}
@@ -204,7 +213,7 @@ export function Button({
         )}
       />
     </span>
-  ) : null;
+  );
 
   const content =
     iconMarkup || disclosureIconMarkup ? (
