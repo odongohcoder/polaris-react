@@ -198,13 +198,8 @@ export function Button({
 
   const spinnerColor = primary || destructive ? 'white' : 'inkLightest';
 
-  const spinnerVisibility = classNames(
-    styles.Spinner,
-    !loading && styles.Hidden,
-  );
-
-  const spinnerSVGMarkup = (
-    <span className={spinnerVisibility}>
+  const spinnerSVGMarkup = loading ? (
+    <span className={styles.Spinner}>
       <Spinner
         size="small"
         color={spinnerColor}
@@ -213,6 +208,8 @@ export function Button({
         )}
       />
     </span>
+  ) : (
+    <span />
   );
 
   const content =
